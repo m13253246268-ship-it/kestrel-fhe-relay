@@ -1,0 +1,26 @@
+# Release 资产不随仓库分发（zip 暂存在 releases/，上传到本仓 Releases）
+#   releases/kestrel-fhe-relay_L0-4_20260915.zip          158.75 MB（超 GitHub 单文件 100 MB 硬限）
+#   releases/kestrel-fhe-relay_L26-27-fin_20260915.zip     64.99 MB
+#   releases/kestrel-fhe-relay_tools_win-x64_20260915.zip   0.53 MB
+# 文件名、大小、SHA256 与上传建议见 data/README.md
+*.zip
+/releases/*.zip
+
+# 本地解压出来的交接物归档
+/L0-4/
+/L26-27-fin/
+/tools-win-x64/
+/data/L0-4/
+/data/L26-27-fin/
+/data/tools-win-x64/
+/releases/L0-4/
+/releases/L26-27-fin/
+/releases/tools-win-x64/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
