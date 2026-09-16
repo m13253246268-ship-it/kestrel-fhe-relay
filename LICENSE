@@ -19,23 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
---------------------------------------------------------------------------------
-Note / 注意
---------------------------------------------------------------------------------
-This MIT license covers the contents of THIS repository (fhe-relay): the docs,
-the indices, the manifests, and the two hand-off archives (ciphertexts, logs and
-the README inside those zip files).
-
-It does NOT relicense the prebuilt binaries inside
-`kestrel-fhe-relay_tools_win-x64_*.zip` (t23lay.exe / t23boot.exe /
-verify_layer.exe): those are built from the AGPL-3.0-or-later sources of the
-main repository `kestrel-llm` and therefore remain under AGPL-3.0-or-later.
-See LICENSING.md for details.
-
-本 MIT 许可覆盖**本仓（fhe-relay）**的内容：文档、索引、清单，以及两份交接物归档
-（其中的密文、日志与包内 README）。
-它**不**为 `kestrel-fhe-relay_tools_win-x64_*.zip` 里的预编译二进制
-（t23lay.exe / t23boot.exe / verify_layer.exe）重新授权——那些是用主仓
-`kestrel-llm` 的 AGPL-3.0-or-later 源码编译出来的，仍然受 AGPL-3.0-or-later
-约束。详见 LICENSING.md。
