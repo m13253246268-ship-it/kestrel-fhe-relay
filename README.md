@@ -73,7 +73,10 @@
    ```powershell
    powershell -NoProfile -ExecutionPolicy Bypass -File tools\relay\rerun5_lay_boot.ps1 -From 5 -To 7
    ```
-5. 一条命令打包并提交：`pack_relay.ps1 -From 5 -To 7 -Id <你的ID>`，把生成的 zip 贴回本仓 Issue（1 层 ≈28 MB）；
+5. 一条命令打包并提交：`pack_relay.ps1 -From 5 -To 7 -Id <你的ID>`，把生成的 zip 挂到**你自己的 Release / 网盘**，
+   在 Issue 里回帖给出**下载链接 + 该 zip 的 SHA256**（1 层 ≈28 MB）；
+   ⚠️ **不要把 zip 直接作附件贴上来**——GitHub 对 Issue / Discussion 附件限 **25 MB**（一层的包 28 MB 超限），
+   而邮件一类中转会重编码字节、使 `manifest.sha256` 全部对不上。**贴链接才是字节保真的方式**；
 6. 下一棒从 `L+1` 继续；**任何人**拿到包后可用 `verify_relay.ps1 -Zip <包>` **一条命令**校验
    （完整性 + 判据 + 结构，退出码 0/1）；
 7. **想查「到底算得对不对」**：用 `verify_layer.ps1 -From L -To L` 解密密文与明文参考逐元素对照

@@ -57,7 +57,7 @@ The source code **does not include** the weights or the reference data. Two rout
 | Route | How | Cost |
 |---|---|---|
 | **A. Generate it yourself (fully reproducible)** | Download `Modl/Qwen3-VL-2B-Instruct/` (`model.safetensors` 4.26 GB + `vocab.json`) and install `numpy` + `safetensors`, then run, from the repository root, the steps in the main repo's `tools/preproc/README.md` §3: `_export_weights.py` → **`_embed4.py`** → **`_silu_mode.py`** → `_full_layers.py` → `_tail_ref.py` → `_sin_fit.py` / `_recip_fit.py` → `_adap_scale.py` | one Python preprocessing pass |
-| **B. Ask the author for a ready-made package** | request it in an Issue | transferring 7 GB |
+| **B. Ask the author for a ready-made package** | leave a note in an Issue (we reply with a **download link**, never as an attachment — 7 GB is far past any attachment cap) | transferring 7 GB |
 
 > ⚠️ **The order is not optional — two files fail silently when missing**:
 > `_embed4.py` (lay0's plaintext input) and `_silu_mode.py` (the per-layer SiLU path switch) produce files
@@ -267,7 +267,9 @@ u{L}r112_3_0.ct  u{L}r112_3_1.ct
 ```
 
 ### 5.2 Handoff bundle
-Pack up the things below and upload them (cloud drive / Release / Issue attachment); the total size is small:
+
+Pack the things below into **one zip**, host it on **your own Release or cloud drive**, and reply in the
+claim issue with the **download link plus that zip's SHA256**:
 
 | File | Description | Size |
 |---|---|---|
@@ -277,6 +279,17 @@ Pack up the things below and upload them (cloud drive / Release / Issue attachme
 | `timing.tsv` `meta.txt` | Wall clock and machine metadata | KB-scale |
 
 Naming suggestion: `relay_L{L}_{yourname}_{date}.zip` (**in practice just generate it in one command with `pack_relay.ps1`, see §5.5**).
+
+> ⚠️ **Do not attach the zip itself to an issue or discussion.** Two hard reasons:
+> 1. **It will not fit**: GitHub caps attachments in issues / PRs / discussions at **10 MB for images and
+>    GIFs and 25 MB for anything else**, while a one-layer package is **≈28 MB**;
+> 2. **Even if it fit, it should not be trusted**: every piece of evidence in this chain rests on
+>    **byte-level hashes** (`manifest.sha256`, `verify_relay.ps1`, `verify_layer -BitA/-BitB`), and
+>    intermediaries such as email re-encode or normalise bytes — after which every `manifest.sha256` entry
+>    mismatches and **you cannot tell "the package was tampered with" from "the relay changed one byte"**.
+>
+> **A link is byte-faithful**: the package that `verify_relay.ps1` downloads must match the SHA256 posted in
+> the claim issue, which also means the contributor cannot swap it afterwards.
 
 > **The next person** drops `u{L}r112_*.ct` back into `.tmp_tok/chain/` and continues with `-From $($L+1)`.
 
@@ -537,9 +550,29 @@ These are facts that were written into the paper draft from the very beginning a
 ## 10. How to report results / claim work
 
 1. Claim a layer range (e.g. `5–7`) in the Issue, to avoid collisions;
-2. when done, post the §5.2 hand-off bundle + `timing.tsv` + criterion logs back to the Issue;
+2. when done, host the hand-off zip on **your own Release or cloud drive** and reply in the Issue with the
+   **download link plus the zip's SHA256**, attaching `timing.tsv` and the criterion logs (**logs are only
+   KB-scale, so pasting them inline is fine; do not attach the zip** — see §5.2);
 3. if the layer-output criterion FAILs, do **not** delete the logs — post `lay{L}.out` / `lay{L}.err` in full (keep the original bytes; do not re-save through Notepad, which re-encodes them);
 4. once the hand-off bundle is confirmed received by the next leg, you can free your own `.ct` reservation.
+
+**Verification and registry (maintainer side, publicly reproducible)**: anyone downloads the package from the
+link and runs one command
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/relay\verify_relay.ps1 -Zip <downloaded package>
+```
+
+(exit code 0 = integrity + criteria + structure all pass), then `verify_layer.ps1 -From L -To L` for
+`max|err|`. Results are recorded in an index table in the **first post of the claim issue**, one row per layer:
+
+| layer | zip SHA256 | contributor | verifier | date | criterion | `verify_layer` max\|err\| | notes |
+|---|---|---|---|---|---|---|---|
+| 5 | `<64 hex>` | `<ID>` | `<ID>` | `<date>` | `RESULT=PASS` / `BOOT=PASS` | `<value>` | — |
+
+> **The registry is an endorsement, not a gate**: verifiability always stays on the public side — anyone can
+> download the same package, run the same command, and reach the same conclusion **without going through us**.
+> That is exactly what §5.5 means by "depending on no one's word".
 
 ---
 

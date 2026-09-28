@@ -81,8 +81,12 @@ can continue from `L+1`.
    ```powershell
    powershell -NoProfile -ExecutionPolicy Bypass -File tools\relay\rerun5_lay_boot.ps1 -From 5 -To 7
    ```
-5. Pack and submit with one command: `pack_relay.ps1 -From 5 -To 7 -Id <your-id>`, then attach the
-   resulting zip to an issue in this repository (1 layer ≈ 28 MB);
+5. Pack and submit with one command: `pack_relay.ps1 -From 5 -To 7 -Id <your-id>`, then host the resulting
+   zip on **your own Release or cloud drive** and reply in the issue with the **download link plus the
+   zip's SHA256** (1 layer ≈ 28 MB);
+   ⚠️ **do not attach the zip itself** — GitHub caps issue/discussion attachments at **25 MB** (a one-layer
+   package is 28 MB), and intermediaries such as email re-encode bytes, which breaks every entry in
+   `manifest.sha256`. **A link is the byte-faithful way to hand it over**;
 6. The next hand takes over at `L+1`; **anyone** can check a received package with a single command
    `verify_relay.ps1 -Zip <package>` (integrity + judging criteria + structure, exit code 0/1);
 7. **To check whether the numbers are actually right**: use `verify_layer.ps1 -From L -To L` to decrypt
