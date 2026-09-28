@@ -45,7 +45,8 @@ publishing all three in one place is simply the least effort for anyone picking 
 
 > ⚠️ **If you take these from the Gitee mirror instead**: Gitee's limit applies to **attachments**
 > (100 MB per file) and is therefore tighter than GitHub's. Only the **tail `L26-27-fin` and the tools
-> package** can be hosted there; the **head `L0-4` is GitHub-only**. Rationale in **§5.1**.
+> package** can be hosted there; the **head `L0-4` is GitHub-only** — but that copy is merely a way to
+> **save about 9 hours**, because **the head can be reproduced locally** (see §5.1). Rationale in **§5.1**.
 
 ---
 
@@ -291,7 +292,28 @@ hash). Splitting changes the hash, which would force the documentation to become
 merge step" — turning a 6-step flow into 8 steps and adding a new "did the merge succeed" failure mode.
 Trading verifiability for one cross-site download is a bad trade.
 
-**The cost, stated plainly**: Gitee readers **cannot obtain the head archive `L0-4`**, and that archive is
-where the next relay's input `u4r112` lives. So **claiming a relay slot still requires fetching the head
-from GitHub**; only the tail and the tools can be saved from Gitee. (The head zip's SHA256 in §1 remains
-the authority regardless of the download channel — it must match from either site.)
+**A missing head archive does not mean the relay is out of reach: the head can be reproduced locally.**
+This needs stating, or the situation reads as "Gitee readers cannot relay at all". The head `L0-4` is not a
+mandatory download — it is a **deterministic product**: generate the data set with the main repo's
+`tools/preproc/` (about 7 GB, **not shipped here** — see §1 and the main repo's
+`tools/preproc/README.md`), then run `lay0..boot4` from the seed exactly as in the guide
+[`../docs/04_Relay_Reproduction_Guide_EN.md`](../docs/04_Relay_Reproduction_Guide_EN.md), and **you obtain
+the same `u4r112`** (the first 5 layers / 10 hops take about 9 h — see that guide's §5.3; cross-architecture
+bit-identity is its §5.4 check ③).
+
+So the two ways to obtain the head relate as follows:
+
+| Route | Cost | Note |
+|---|---|---|
+| Download `L0-4` from GitHub | one 158.75 MB download | **Saves time**: skips data generation (a Python preprocessing pass) and the ≈9 h of layers 0–4 |
+| Reproduce the head locally | ≈9 h of CPU + ≈7 GB of data (self-generated) | **Requires no large download at all**, and is consistent with this repo's "reproducible and verifiable" claim |
+
+> **This repository deliberately does not distribute large data**: the ≈7 GB data set (including
+> `embed.bin` at 1.24 GB and the per-layer weights under `tail/w{L}/`) is **in no Release and is not going
+> to be** — it is generated from the public model (`Qwen3-VL-2B-Instruct`, ≈4.26 GB) by the main repo's
+> `tools/preproc/`. The head zip contains **no weights**, only ciphertexts and logs; so the "do not ship the
+> weights" principle has always held here, and the Gitee attachment cap merely removes one download channel
+> for **that one ready-made copy of the head**.
+>
+> (The head zip's SHA256 in §1 remains the authority regardless of the channel: a file downloaded from
+> GitHub and one you reproduced yourself must both match the same value.)

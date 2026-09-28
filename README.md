@@ -10,7 +10,9 @@
 > **Gitee 镜像**：本仓在 <https://gitee.com/pei-xiaoguang/fhe-relay> 同步一份。
 > 其中**链尾 `L26-27-fin` 与预编译工具**同时挂在 Gitee Releases；**链头 `L0-4` 只在 GitHub** ——
 > Gitee 的发行版附件有 **100 MB 单文件上限**（GitHub 是 2 GB/资产），该包 158.75 MB 超限，
-> 且**不拆分**（拆卷会使本仓那个"单一 zip 的 SHA256"验证锚点失效）。取舍理由见 [`data/README.md`](data/README.md) §1。
+> 且**不拆分**（拆卷会使本仓那个"单一 zip 的 SHA256"验证锚点失效）。
+> **但链头并非必须下载**：它是确定性产物，按指南从种子跑 `lay0..boot4` 即可自行复现（约 9 h）——见
+> [`data/README.md`](data/README.md) §5.1。
 
 ---
 

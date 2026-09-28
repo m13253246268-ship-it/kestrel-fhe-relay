@@ -16,8 +16,9 @@
 > There, the **tail archive `L26-27-fin` and the prebuilt tools** are also attached; the **head archive
 > `L0-4` remains GitHub-only** — Gitee caps release attachments at **100 MB per file** (GitHub allows
 > 2 GB per asset), and that package is 158.75 MB. It is deliberately **not split into parts**, because
-> splitting would invalidate this repo's "single-zip SHA256" verification anchor. Rationale in
-> [`data/README.en.md`](data/README.en.md) §1 / §5.1.
+> splitting would invalidate this repo's "single-zip SHA256" verification anchor.
+> **The head is not a mandatory download, though**: it is a deterministic product and can be reproduced
+> locally by running `lay0..boot4` from the seed (about 9 h) — see [`data/README.en.md`](data/README.en.md) §5.1.
 
 ---
 
