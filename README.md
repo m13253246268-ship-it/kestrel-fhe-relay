@@ -97,7 +97,7 @@
 | 数据预处理脚本 | 主仓 `tools/preproc/` |
 | **链头归档 `L0-4`（158.75 MB / 105 文件）** | 本仓 https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases —— **只在 GitHub**（超 Gitee 附件 100 MB 上限），见 [`data/README.md`](data/README.md) |
 | **链尾归档 `L26-27-fin`（64.99 MB / 46 文件）** | GitHub 同上；**Gitee 亦有** <https://gitee.com/pei-xiaoguang/fhe-relay/releases> 。**是尾部支线，绕过 5–25 层**，不要读成整链 |
-| **预编译工具（Windows x86-64，0.53 MB / 7 文件）** | GitHub 同上；**Gitee 亦有** <https://gitee.com/pei-xiaoguang/fhe-relay/releases> 。`t23lay` / `t23boot` / `verify_layer`，静态链接，免装 MinGW。**注意：这三个二进制仍是 AGPL-3.0-or-later**，见 §10 |
+| **预编译工具（Windows x86-64，0.53 MB / 7 文件）** | GitHub 同上；**Gitee 亦有** <https://gitee.com/pei-xiaoguang/fhe-relay/releases> 。`t23lay` / `t23boot` / `verify_layer`，静态链接，免装 MinGW。**注意：这份旧包里的二进制仍是 AGPL-3.0-or-later**（由 AGPL 时期的主仓 commit 构建，授权不可撤回），见 §10 |
 | 运行数据包（约 7 GB，`sk.bin` + 权重 + 明文参考） | **不随仓库分发**；可在 Issue 下索取，或用主仓 `tools/preproc/` 自行转换 |
 
 > 体积单位：本仓按惯例用 **MB 表示 MiB**（1 MB = 1,048,576 B，与 GitHub 的显示口径一致）；
@@ -194,9 +194,9 @@
 
 **联系**：请优先在 **Issues** 区留言（认领层号 / 索取数据 / 报告问题）。
 
-**许可（本仓）**：**MIT** —— 本仓的文档、索引、清单与两份交接物归档可自由使用、复制、修改、分发、再许可与销售，只需保留版权与许可声明，见 [`LICENSE`](LICENSE)。
+**许可（本仓）**：**Apache-2.0** —— 本仓的文档、索引、清单与两份交接物归档可自由使用、复制、修改、分发、再许可与销售（**含闭源商用**），只需保留版权与许可声明并标注修改，见 [`LICENSE`](LICENSE)。
 
-**两处例外，请勿误读**（详见 [`LICENSING.md`](LICENSING.md)）：
+**两处必须讲清的边界**（详见 [`LICENSING.md`](LICENSING.md)）：
 
-1. `releases/` 中 `kestrel-fhe-relay_tools_win-x64_*.zip` 里的 **`t23lay.exe` / `t23boot.exe` / `verify_layer.exe`** 是用**主仓 AGPL-3.0-or-later 源码**编译出来的，**仍受 AGPL-3.0-or-later 约束**，不受本仓 MIT 的重新授权（对应源码见 [`SOURCE.md`](SOURCE.md) 锚定的 commit）。
-2. **主仓 `kestrel-llm` 的代码**仍按其自身许可发布（AGPL-3.0-or-later / 商业授权双许可）；本仓的 MIT **不改变、也不覆盖**它。
+1. `releases/` 中 `kestrel-fhe-relay_tools_win-x64_*.zip` 里的 **`t23lay.exe` / `t23boot.exe` / `verify_layer.exe`** 由**主仓源码**编译。**已上传的那份旧包**出自 AGPL 时期的主仓 commit（见 [`SOURCE.md`](SOURCE.md)），**仍是 AGPL-3.0-or-later**，已下载者永久保有该授权；只有**本次许可变更之后**从主仓重新构建的工具才是 Apache-2.0。
+2. **主仓 `kestrel-llm` 的代码**以其自身许可为准：**自 2026-09 本次变更起为 Apache-2.0**；**变更之前**的 commit（含 `SOURCE.md` 锚定的那个）**仍为 AGPL-3.0-or-later**。本仓的 Apache-2.0 **不改变、也不覆盖**它。

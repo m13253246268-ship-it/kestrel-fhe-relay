@@ -108,7 +108,7 @@ can continue from `L+1`.
 | Data-preprocessing scripts | main repo, `tools/preproc/` |
 | **Head archive `L0-4` (158.75 MB / 105 files)** | this repo's https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases — **GitHub only** (exceeds Gitee's 100 MB attachment cap), see [`data/README.en.md`](data/README.en.md) |
 | **Tail archive `L26-27-fin` (64.99 MB / 46 files)** | GitHub as above; **also on Gitee** at <https://gitee.com/pei-xiaoguang/fhe-relay/releases> . **It is a tail branch that bypasses layers 5–25** — do not read it as the whole chain |
-| **Prebuilt tools (Windows x86-64, 0.53 MB / 7 files)** | GitHub as above; **also on Gitee** at <https://gitee.com/pei-xiaoguang/fhe-relay/releases> . `t23lay` / `t23boot` / `verify_layer`, statically linked, no MinGW required. **Note: these three binaries remain AGPL-3.0-or-later** — see §10 |
+| **Prebuilt tools (Windows x86-64, 0.53 MB / 7 files)** | GitHub as above; **also on Gitee** at <https://gitee.com/pei-xiaoguang/fhe-relay/releases> . `t23lay` / `t23boot` / `verify_layer`, statically linked, no MinGW required. **Note: the binaries in this already-uploaded package remain AGPL-3.0-or-later** (built from an AGPL-era main-repo commit; that grant cannot be revoked) — see §10 |
 | Full run data package (about 7 GB: `sk.bin` + weights + plaintext references) | **not shipped with the repository**; ask in an issue, or build it with the main repo's `tools/preproc/` |
 
 > Size units: this repository follows the common convention of writing **MB for MiB** (1 MB = 1,048,576 B,
@@ -208,15 +208,19 @@ Every document above has a Chinese counterpart in the same directory — see [`R
 
 **Contact**: please use **Issues** first (claim a layer / request the data package / report a problem).
 
-**Licence (this repository)**: **MIT** — this repository's docs, indices, manifests and the two hand-off
-archives may be freely used, copied, modified, distributed, sublicensed and sold, provided the copyright
-and licence notice are kept. See [`LICENSE`](LICENSE).
+**Licence (this repository)**: **Apache-2.0** — this repository's docs, indices, manifests and the two
+hand-off archives may be freely used, copied, modified, distributed, sublicensed and sold
+(**including in closed-source commercial products**), provided the copyright and licence notices are
+kept and modified files are marked. See [`LICENSE`](LICENSE).
 
-**Two exceptions — do not misread them** (details in [`LICENSING.md`](LICENSING.md)):
+**Two boundaries that must be stated clearly** (details in [`LICENSING.md`](LICENSING.md)):
 
 1. The **`t23lay.exe` / `t23boot.exe` / `verify_layer.exe`** inside
-   `releases/kestrel-fhe-relay_tools_win-x64_*.zip` are built from the **AGPL-3.0-or-later sources** of the
-   main repository and therefore **remain under AGPL-3.0-or-later**; this repository's MIT does not
-   relicense them (the Corresponding Source is the commit pinned in [`SOURCE.en.md`](SOURCE.en.md)).
-2. **The main repository `kestrel-llm`'s code** stays under its own licence
-   (dual-licensed AGPL-3.0-or-later / commercial); this repository's MIT **does not alter or extend to it**.
+   `releases/kestrel-fhe-relay_tools_win-x64_*.zip` are built from **main-repo sources**. **The
+   already-uploaded package** comes from an AGPL-era main-repo commit (see [`SOURCE.en.md`](SOURCE.en.md))
+   and **remains AGPL-3.0-or-later**; recipients keep that grant permanently. Only tools **rebuilt
+   after this licence change** are Apache-2.0.
+2. **The main repository `kestrel-llm`'s code** stays under its own licence: it is **Apache-2.0 from
+   this change onward (2026-09)**, while **commits before the change** (including the one pinned in
+   `SOURCE.en.md`) **remain AGPL-3.0-or-later**. This repository's Apache-2.0 **does not alter or
+   extend to it**.
