@@ -58,7 +58,7 @@ The handoff artifact `u4r112` is complete at 8/8 and is ready for layer 5.
 | `boot3` | 1693.72 s | 1680.53 s | 857.48 s | 31.35 s | 4263.08 s |
 | `boot4` | 1717.49 s | 1700.39 s | 862.28 s | 32.20 s | 4312.36 s |
 
-> Takeaway: **≈ 98%** of `boot` time sits in `coeff_to_slot` + `slot_to_coeff` (about 28 min each).
+> Takeaway: **≈ 79%** of `boot` time sits in `coeff_to_slot` + `slot_to_coeff` (about 29 min each).
 > The two `sin_fold` stages add up to about 14 min, and `modraise / rotate_k / conj_extract /
 > restore_merge` together amount to only tens of seconds.
 
@@ -250,7 +250,9 @@ error if you pass 0.
   consuming the alternative input also returns `RESULT=PASS` with digit-identical statistics.
 - Measured per-layer cost: `lay` ≈ 33 min, `boot` ≈ 72–82 min, i.e. **≈ 1.6–1.9 h per layer** (4 threads, CPU only);
   5 layers / 10 hops total **≈ 8.9 h**.
-- Nearly all of that time sits in `coeff_to_slot` and `slot_to_coeff` (about 98% combined).
+- The bulk of that time sits in `coeff_to_slot` and `slot_to_coeff` (**79.2%** combined); the other
+  20.0% is the two `sin_fold` stages, and the remaining five stages total only 0.7%
+  (see [`03_Measured_Data_Appendix_EN.md`](./03_Measured_Data_Appendix_EN.md) §3).
 
 **Cannot be stated**
 
