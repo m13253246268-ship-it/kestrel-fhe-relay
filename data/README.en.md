@@ -43,6 +43,10 @@ SHA256 of the ZIPs themselves:
 package (158.75 MB) **cannot be committed to the repository**. The tools package is only 0.53 MB, but
 publishing all three in one place is simply the least effort for anyone picking them up.
 
+> ⚠️ **If you take these from the Gitee mirror instead**: Gitee's limit applies to **attachments**
+> (100 MB per file) and is therefore tighter than GitHub's. Only the **tail `L26-27-fin` and the tools
+> package** can be hosted there; the **head `L0-4` is GitHub-only**. Rationale in **§5.1**.
+
 ---
 
 ## 2. What is inside
@@ -264,3 +268,30 @@ Each attachment is well within GitHub's 2 GB per-asset limit, but note §1: **th
 limit only constrains "committing to the repository", not Release attachments.** The tools package is only
 0.53 MB and could in principle be committed — it still goes through Releases so that all three assets are
 picked up in one place without undermining the "sources live in exactly one place" rule.
+
+### 5.1 Gitee mirror: only two of the three fit (rationale)
+
+This repository is mirrored at <https://gitee.com/pei-xiaoguang/fhe-relay>. Gitee's quotas differ from
+GitHub's. Per the [Gitee quota page](https://gitee.com/help/articles/4283) (community edition / personal):
+
+> Attachment capacity: **maximum 100 MB per attachment**; 1 GB total per repository.
+
+That is an **attachment** cap — unlike GitHub, where the 100 MB figure applies only to committing into
+the repository while releases allow 2 GB per asset. The consequence:
+
+| Asset | Size | GitHub Releases | Gitee Releases |
+|---|---|---|---|
+| Head `L0-4` | 158.75 MB | ✅ (2 GB per asset) | ❌ **exceeds the 100 MB attachment cap** |
+| Tail `L26-27-fin` | 64.99 MB | ✅ | ✅ |
+| Tools `tools_win-x64` | 0.53 MB | ✅ | ✅ |
+
+**Why the head archive is not split into <100 MB parts**: this repo's verification procedure is "check the
+SHA256 of *this one zip*, then extract" (§1 table and the guide's Appendix B both anchor on a single zip
+hash). Splitting changes the hash, which would force the documentation to become "per-part hashes + a
+merge step" — turning a 6-step flow into 8 steps and adding a new "did the merge succeed" failure mode.
+Trading verifiability for one cross-site download is a bad trade.
+
+**The cost, stated plainly**: Gitee readers **cannot obtain the head archive `L0-4`**, and that archive is
+where the next relay's input `u4r112` lives. So **claiming a relay slot still requires fetching the head
+from GitHub**; only the tail and the tools can be saved from Gitee. (The head zip's SHA256 in §1 remains
+the authority regardless of the download channel — it must match from either site.)

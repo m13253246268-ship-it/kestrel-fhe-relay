@@ -11,6 +11,13 @@
 > attached to https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases ; see [`data/README.en.md`](data/README.en.md) for verification.
 > **You do not have to build the tools either** — prebuilt Windows x86-64 binaries (0.53 MB, no MinGW
 > needed) sit in the same Releases.
+>
+> **Gitee mirror**: this repository is mirrored at <https://gitee.com/pei-xiaoguang/fhe-relay>.
+> There, the **tail archive `L26-27-fin` and the prebuilt tools** are also attached; the **head archive
+> `L0-4` remains GitHub-only** — Gitee caps release attachments at **100 MB per file** (GitHub allows
+> 2 GB per asset), and that package is 158.75 MB. It is deliberately **not split into parts**, because
+> splitting would invalidate this repo's "single-zip SHA256" verification anchor. Rationale in
+> [`data/README.en.md`](data/README.en.md) §1 / §5.1.
 
 ---
 
@@ -94,9 +101,9 @@ can continue from `L+1`.
 | Relay scripts (run / pack / verify / accuracy check) | main repo, `tools/relay/` |
 | Engine sources `vllm_ntt.c` / `vllm_ckks.c` / `vllm_tp.c` | main repo, `src/core/` |
 | Data-preprocessing scripts | main repo, `tools/preproc/` |
-| **Head archive `L0-4` (158.75 MB / 105 files)** | this repo's https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases , see [`data/README.en.md`](data/README.en.md) |
-| **Tail archive `L26-27-fin` (64.99 MB / 46 files)** | same place; **it is a tail branch that bypasses layers 5–25** — do not read it as the whole chain |
-| **Prebuilt tools (Windows x86-64, 0.53 MB / 7 files)** | same place; `t23lay` / `t23boot` / `verify_layer`, statically linked, no MinGW required. **Note: these three binaries remain AGPL-3.0-or-later** — see §10 |
+| **Head archive `L0-4` (158.75 MB / 105 files)** | this repo's https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases — **GitHub only** (exceeds Gitee's 100 MB attachment cap), see [`data/README.en.md`](data/README.en.md) |
+| **Tail archive `L26-27-fin` (64.99 MB / 46 files)** | GitHub as above; **also on Gitee** at <https://gitee.com/pei-xiaoguang/fhe-relay/releases> . **It is a tail branch that bypasses layers 5–25** — do not read it as the whole chain |
+| **Prebuilt tools (Windows x86-64, 0.53 MB / 7 files)** | GitHub as above; **also on Gitee** at <https://gitee.com/pei-xiaoguang/fhe-relay/releases> . `t23lay` / `t23boot` / `verify_layer`, statically linked, no MinGW required. **Note: these three binaries remain AGPL-3.0-or-later** — see §10 |
 | Full run data package (about 7 GB: `sk.bin` + weights + plaintext references) | **not shipped with the repository**; ask in an issue, or build it with the main repo's `tools/preproc/` |
 
 > Size units: this repository follows the common convention of writing **MB for MiB** (1 MB = 1,048,576 B,

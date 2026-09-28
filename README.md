@@ -6,6 +6,11 @@
 > **代码不在这里**——驱动与引擎源码单点保留在主仓 `kestrel-llm`，版本锚点见 [`SOURCE.md`](SOURCE.md)。
 > **数据不在这里**——两份交接物归档（链头 `L0-4` 158.75 MB、链尾 `L26-27-fin` 64.99 MB，均为**下载体积**）挂在
 > https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases ，校验方式见 [`data/README.md`](data/README.md)。
+>
+> **Gitee 镜像**：本仓在 <https://gitee.com/pei-xiaoguang/fhe-relay> 同步一份。
+> 其中**链尾 `L26-27-fin` 与预编译工具**同时挂在 Gitee Releases；**链头 `L0-4` 只在 GitHub** ——
+> Gitee 的发行版附件有 **100 MB 单文件上限**（GitHub 是 2 GB/资产），该包 158.75 MB 超限，
+> 且**不拆分**（拆卷会使本仓那个"单一 zip 的 SHA256"验证锚点失效）。取舍理由见 [`data/README.md`](data/README.md) §1。
 
 ---
 
@@ -85,9 +90,9 @@
 | 接力脚本（跑层/打包/验包/准确度校验） | 主仓 `tools/relay/` |
 | 引擎源码 `vllm_ntt.c` / `vllm_ckks.c` / `vllm_tp.c` | 主仓 `src/core/` |
 | 数据预处理脚本 | 主仓 `tools/preproc/` |
-| **链头归档 `L0-4`（158.75 MB / 105 文件）** | 本仓 https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases ，见 [`data/README.md`](data/README.md) |
-| **链尾归档 `L26-27-fin`（64.99 MB / 46 文件）** | 同上；**是尾部支线，绕过 5–25 层**，不要读成整链 |
-| **预编译工具（Windows x86-64，0.53 MB / 7 文件）** | 同上；`t23lay` / `t23boot` / `verify_layer`，静态链接，免装 MinGW。**注意：这三个二进制仍是 AGPL-3.0-or-later**，见 §10 |
+| **链头归档 `L0-4`（158.75 MB / 105 文件）** | 本仓 https://github.com/m13253246268-ship-it/kestrel-fhe-relay/releases —— **只在 GitHub**（超 Gitee 附件 100 MB 上限），见 [`data/README.md`](data/README.md) |
+| **链尾归档 `L26-27-fin`（64.99 MB / 46 文件）** | GitHub 同上；**Gitee 亦有** <https://gitee.com/pei-xiaoguang/fhe-relay/releases> 。**是尾部支线，绕过 5–25 层**，不要读成整链 |
+| **预编译工具（Windows x86-64，0.53 MB / 7 文件）** | GitHub 同上；**Gitee 亦有** <https://gitee.com/pei-xiaoguang/fhe-relay/releases> 。`t23lay` / `t23boot` / `verify_layer`，静态链接，免装 MinGW。**注意：这三个二进制仍是 AGPL-3.0-or-later**，见 §10 |
 | 运行数据包（约 7 GB，`sk.bin` + 权重 + 明文参考） | **不随仓库分发**；可在 Issue 下索取，或用主仓 `tools/preproc/` 自行转换 |
 
 > 体积单位：本仓按惯例用 **MB 表示 MiB**（1 MB = 1,048,576 B，与 GitHub 的显示口径一致）；
